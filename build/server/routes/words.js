@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+exports.router = void 0;
+var express_1 = require("express");
+var word_1 = require("../controllers/word");
+var router = express_1.Router();
+exports.router = router;
+router.get("/", word_1.getAll);
+router.get("/:id", word_1.getById);
+router.post("/create", word_1.create);
+router.post("/:id", word_1.update);
+router["delete"]("/:id", word_1.remove);

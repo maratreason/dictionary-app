@@ -1,0 +1,12 @@
+{
+	"baseUrl": "types",
+	"typeRoots": ["types"],
+	"compilerOptions": {
+		"lib": [
+			"DOM",
+			"ES2015"
+		],
+		"outDir": "./build",
+		"rootDir": "./server"
+	},
+}

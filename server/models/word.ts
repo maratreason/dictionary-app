@@ -18,4 +18,6 @@ const word = new Schema({
     }
 });
 
-module.exports = model("Word", word);
+const Word = model("Word", word);
+
+export default Word;

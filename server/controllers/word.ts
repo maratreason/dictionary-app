@@ -1,9 +1,17 @@
-const Word = require("../models/word");
-const errorHandler = require("../utils/errorHandler");
+import { Request, Response } from "express";
+import Word from "../models/word";
+import errorHandler from "../utils/errorHandler";
 
-exports.getAll = async function (req, res) {
+interface Word {
+	name: string;
+	translate: string;
+	description?: string;
+	createdAt: Date;
+}
+
+async function getAll(req: Request, res: Response) {
 	try {
-		const words = await Word.find();
+		const words: Word[] = await Word.find();
 
 		res.status(200).json({
 			status: "success",
@@ -17,7 +25,7 @@ exports.getAll = async function (req, res) {
 	}
 };
 
-exports.getById = async function (req, res) {
+async function getById(req, res) {
 	try {
 		const word = await Word.findById(req.params.id);
 
@@ -32,7 +40,7 @@ exports.getById = async function (req, res) {
 	}
 };
 
-exports.create = async function (req, res) {
+async function create(req, res) {
 	try {
 		const word = await Word.create(req.body);
 
@@ -47,7 +55,7 @@ exports.create = async function (req, res) {
 	}
 };
 
-exports.update = async function (req, res) {
+async function update(req, res) {
 	try {
 		const word = await Word.findByIdAndUpdate(req.params.id, req.body);
 
@@ -61,7 +69,7 @@ exports.update = async function (req, res) {
 	}
 };
 
-exports.delete = async function (req, res) {
+async function remove(req, res) {
 	try {
 		const word = await Word.deleteOne({ _id: req.params.id });
 
@@ -73,3 +81,11 @@ exports.delete = async function (req, res) {
 		errorHandler(res, e);
 	}
 };
+
+export {
+	getAll,
+	getById,
+	create,
+	update,
+	remove
+}
